@@ -16,7 +16,7 @@ public class navigateToApplication {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 		driver.manage().window().maximize();
 		driver.get("https://fireflink.com");
-		driver.quit();
+		driver.close();
 	}
 
 }
