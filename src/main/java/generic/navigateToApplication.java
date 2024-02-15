@@ -26,19 +26,21 @@ public class navigateToApplication {
 		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[contains(@data-testid,\"Logo\")]/img"))));
 		boolean companyLogoDisplaye = driver.findElement(By.xpath("//a[contains(@data-testid,\"Logo\")]/img")).isDisplayed();
 		System.out.println("The Company Logo Is Displayed :"+companyLogoDisplaye);
-		String userIcon = "//a[contains(@class,'user-link')]";
-		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(userIcon))));
-		explicitWait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(userIcon))));
-		driver.findElement(By.xpath(userIcon)).click();
-		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[contains(@placeholder,'Enter your Email ID or phone number')]"))));
-		explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@placeholder,'Enter your Email ID or phone number')]")));
-		WebElement EmailTextField = driver.findElement(By.xpath("//input[contains(@placeholder,'Enter your Email ID or phone number')]"));
-		String email ="cromatestproject@gmail.com";
-		EmailTextField.sendKeys(email);
-		String fieldValue = EmailTextField.getAttribute("value");
-		boolean TextfieldContains = fieldValue.contains(email);
-		System.out.println(TextfieldContains);
+		String menu = "//span[contains(text(),'Menu')]";
+		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(menu))));
+		explicitWait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(menu))));
+		driver.findElement(By.xpath(menu)).click();
+		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//p[contains(text(),'Shop by Category')]"))));
+		explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//p[contains(text(),'Shop by Category')]")));
+		boolean ShopByCateoryText = driver.findElement(By.xpath("//p[contains(text(),'Shop by Category')]")).isDisplayed();
+		String ShopByCateoryTextafter = driver.findElement(By.xpath("//p[contains(text(),'Shop by Category')]")).getText();
+		System.out.println(ShopByCateoryTextafter);
+		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h4[contains(text(),'Televisions & Accessories')]")))).click();
+		boolean TelevisionsIsdisplayed = explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h1[contains(text(),'Televisions & Accessories')]")))).isDisplayed();
+		System.out.println(TelevisionsIsdisplayed);
 		driver.quit();
+		
+		//h1[contains(text(),'Televisions & Accessories')]
 		
 	}
 
