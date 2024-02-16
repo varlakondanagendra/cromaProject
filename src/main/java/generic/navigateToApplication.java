@@ -64,8 +64,8 @@ public class navigateToApplication {
 		System.out.println(firstProductDiscountValue);
 		System.out.println(firstProductDiscountPercentage);
 		System.out.println(deliveryType);
-		
-		
+		String onlyAmount = fetchNumberFromString.numbers(firstProductDiscountedPrice);
+		System.out.println(onlyAmount);
 		
 		driver.quit();
 		
