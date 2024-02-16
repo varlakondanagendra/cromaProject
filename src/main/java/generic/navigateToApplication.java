@@ -19,28 +19,57 @@ public class navigateToApplication {
 		WebDriver driver=new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		driver.manage().window().maximize();
-		driver.get("https://www.croma.com/");
+		String cromaUrl = "https://www.croma.com/";
+		driver.get(cromaUrl);
 		String titleOfThePage = driver.getTitle();
 		System.out.println("The Title Of The Page Is :"+titleOfThePage);
 		WebDriverWait explicitWait=new WebDriverWait(driver, Duration.ofSeconds(30));
-		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[contains(@data-testid,\"Logo\")]/img"))));
-		boolean companyLogoDisplaye = driver.findElement(By.xpath("//a[contains(@data-testid,\"Logo\")]/img")).isDisplayed();
+		String cromaLogo = "//a[contains(@data-testid,'Logo')]/img";
+		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(cromaLogo))));
+		boolean companyLogoDisplaye = driver.findElement(By.xpath(cromaLogo)).isDisplayed();
 		System.out.println("The Company Logo Is Displayed :"+companyLogoDisplaye);
 		String menu = "//span[contains(text(),'Menu')]";
 		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(menu))));
 		explicitWait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(menu))));
 		driver.findElement(By.xpath(menu)).click();
-		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//p[contains(text(),'Shop by Category')]"))));
-		explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//p[contains(text(),'Shop by Category')]")));
-		boolean ShopByCateoryText = driver.findElement(By.xpath("//p[contains(text(),'Shop by Category')]")).isDisplayed();
-		String ShopByCateoryTextafter = driver.findElement(By.xpath("//p[contains(text(),'Shop by Category')]")).getText();
+		String mainCategory = "//p[contains(text(),'Shop by Category')]";
+		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(mainCategory))));
+		explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath(mainCategory)));
+		boolean ShopByCateoryText = driver.findElement(By.xpath(mainCategory)).isDisplayed();
+		String ShopByCateoryTextafter = driver.findElement(By.xpath(mainCategory)).getText();
 		System.out.println(ShopByCateoryTextafter);
-		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h4[contains(text(),'Televisions & Accessories')]")))).click();
-		boolean TelevisionsIsdisplayed = explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h1[contains(text(),'Televisions & Accessories')]")))).isDisplayed();
+		String subCategory = "//h4[contains(text(),'Televisions & Accessories')]";
+		String plpTitle = "//h1[contains(text(),'Televisions & Accessories')]";
+		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(subCategory)))).click();
+		boolean TelevisionsIsdisplayed = explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(plpTitle)))).isDisplayed();
 		System.out.println(TelevisionsIsdisplayed);
+		String firstProductTitileXpath = "//div[contains(@class,'product-info')]/div/div/h3[@class='product-title plp-prod-title']";
+		String firstProductDiscountedPriceXpath = "//div[contains(@class,'product-info')]/following-sibling::div/div/div/span";
+		String firstProductOldPriceXpath = "//div[contains(@class,'product-info')]/following-sibling::div/div/following-sibling::div/span/span";
+		String firstProductDiscountValueXpath = "//div[contains(@class,'product-info')]/following-sibling::div/div/following-sibling::div/span[2]";	
+		String firstProductDiscountPercentageXpath = "//div[contains(@class,'product-info')]/following-sibling::div/div/following-sibling::div/span[3]";	
+		String deliveryTypeXpath = "//div[contains(@class,'product-info')]/following-sibling::div/div/div[@class='delivery-icon']/span[2]/span";		
+		String firstProductLinkXpath = "//div[contains(@data-testid,'product-id')]";
+		
+		String firstProductTitile =driver.findElement(By.xpath(firstProductTitileXpath)).getText();
+		String firstProductDiscountedPrice = driver.findElement(By.xpath(firstProductDiscountedPriceXpath)).getText();
+		String firstProductOldPrice = driver.findElement(By.xpath(firstProductOldPriceXpath)).getText();
+		String firstProductDiscountValue = driver.findElement(By.xpath(firstProductDiscountValueXpath)).getText();	
+		String firstProductDiscountPercentage = driver.findElement(By.xpath(firstProductDiscountPercentageXpath)).getText();		
+		String deliveryType = driver.findElement(By.xpath(deliveryTypeXpath)).getText();		
+		driver.findElement(By.xpath(deliveryTypeXpath)).click();
+		System.out.println(firstProductTitile);
+		System.out.println(firstProductDiscountedPrice);
+		System.out.println(firstProductOldPrice);
+		System.out.println(firstProductDiscountValue);
+		System.out.println(firstProductDiscountPercentage);
+		System.out.println(deliveryType);
+		
+		
+		
 		driver.quit();
 		
-		//h1[contains(text(),'Televisions & Accessories')]
+		
 		
 	}
 
