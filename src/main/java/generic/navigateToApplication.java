@@ -1,6 +1,9 @@
 package generic;
 
 import java.time.Duration;
+import java.time.temporal.TemporalAmount;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.commons.logging.impl.SLF4JLogFactory;
 import org.openqa.selenium.By;
@@ -57,7 +60,7 @@ public class navigateToApplication {
 		String firstProductDiscountValue = driver.findElement(By.xpath(firstProductDiscountValueXpath)).getText();	
 		String firstProductDiscountPercentage = driver.findElement(By.xpath(firstProductDiscountPercentageXpath)).getText();		
 		String deliveryType = driver.findElement(By.xpath(deliveryTypeXpath)).getText();		
-		driver.findElement(By.xpath(deliveryTypeXpath)).click();
+		driver.findElement(By.xpath(firstProductLinkXpath)).click();
 		System.out.println(firstProductTitile);
 		System.out.println(firstProductDiscountedPrice);
 		System.out.println(firstProductOldPrice);
@@ -66,7 +69,33 @@ public class navigateToApplication {
 		System.out.println(deliveryType);
 		String onlyAmount = fetchNumberFromString.numbers(firstProductDiscountedPrice);
 		System.out.println(onlyAmount);
-		
+		String OriginalWindow = driver.getWindowHandle();
+		System.out.println(OriginalWindow);
+		Set<String> AllWindowID = driver.getWindowHandles();
+		for (String windlowHandle:AllWindowID) {
+			if(!windlowHandle.equals(OriginalWindow)) {
+				driver.switchTo().window(windlowHandle);
+			}
+		}		
+		String ChildWindowId = driver.getWindowHandle();
+		System.out.println(ChildWindowId);
+		String pdpPageURL = driver.getCurrentUrl();
+		System.out.println(pdpPageURL);
+		String pdpPagetitle = driver.getTitle();
+		System.out.println(pdpPagetitle);
+		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("(//div[@class=\"pdpBreadcrumbdiv\"]/div/div/ul/li/a)[1]"))));
+		String bredcrumbCategory = "(//div[@class='pdpBreadcrumbdiv']/div/div/ul/li/a)[1]";
+		String bredcrumbSubMainCategory = "(//div[@class='pdpBreadcrumbdiv']/div/div/ul/li/a)[2]";
+		String bredcrumbSubCategory = "(//div[@class='pdpBreadcrumbdiv']/div/div/ul/li/a)[3]";
+		String breadcrumbCategoryName = driver.findElement(By.xpath(bredcrumbCategory)).getText();
+		String breadcrumbSubMainCategoryName = driver.findElement(By.xpath(bredcrumbSubMainCategory)).getText();
+		String breadcrumbSubCategoryName = driver.findElement(By.xpath(bredcrumbSubCategory)).getText();
+		boolean bredcrumbNameContains = breadcrumbSubCategoryName.contains(firstProductTitile);
+		boolean bredcrumbsubMainNameContains = breadcrumbSubMainCategoryName.contains(firstProductTitile);
+		boolean bredcrumbSubNameContains = breadcrumbCategoryName.contains(firstProductTitile);
+		System.out.println(bredcrumbNameContains);
+		System.out.println(bredcrumbsubMainNameContains);
+		System.out.println(bredcrumbSubNameContains);
 		driver.quit();
 		
 		
