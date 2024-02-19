@@ -7,6 +7,8 @@ import java.util.Set;
 
 import org.apache.commons.logging.impl.SLF4JLogFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,7 +19,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class navigateToApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver=new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
@@ -103,6 +105,14 @@ public class navigateToApplication {
 		String OnlyProductAmountInPDP = fetchNumberFromString.numbers(ProductPriceInPDP);
 		boolean Amountconatins = OnlyProductAmountInPDP.contains(onlyAmount);
 		System.out.println(Amountconatins);
+		WebElement keyFeatureElement =driver.findElement(By.xpath("//h2[text()='Key Features']")) ;
+		//keyFeatureElement.sendKeys(Keys.PAGE_DOWN);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", keyFeatureElement);
+		explicitWait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//button[@class='btn btn-secondary pdp-add-to-cart']"))));
+		driver.findElement(By.xpath("//button[@class='btn btn-secondary pdp-add-to-cart']")).click();
+		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='mini-cart-status-container']"))));
+		driver.findElement(By.xpath("//button[@class='btn btn-default proceed-tocart']")).click();
+		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[@class='your-cart']")))).isDisplayed();
 		driver.quit();
 		
 	}
