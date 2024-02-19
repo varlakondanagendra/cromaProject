@@ -96,9 +96,14 @@ public class navigateToApplication {
 		System.out.println(bredcrumbNameContains);
 		System.out.println(bredcrumbsubMainNameContains);
 		System.out.println(bredcrumbSubNameContains);
+		String pdptitle = driver.findElement(By.xpath("//h1[@class='pd-title pd-title-normal']")).getText();
+		boolean productNamecontains = pdptitle.contains(firstProductTitile);
+		System.out.println("ProductNameContains :"+productNamecontains);
+		String ProductPriceInPDP = driver.findElement(By.xpath("//div[@class='new-price']/span[@data-testid='new-price' and @class='amount']")).getText();
+		String OnlyProductAmountInPDP = fetchNumberFromString.numbers(ProductPriceInPDP);
+		boolean Amountconatins = OnlyProductAmountInPDP.contains(onlyAmount);
+		System.out.println(Amountconatins);
 		driver.quit();
-		
-		
 		
 	}
 
