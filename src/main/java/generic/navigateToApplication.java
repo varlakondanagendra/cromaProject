@@ -114,6 +114,7 @@ public class navigateToApplication {
 		driver.findElement(By.xpath("//button[@class='btn btn-default proceed-tocart']")).click();
 		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[@class='your-cart']")))).isDisplayed();
 		//my name is nagendra
+		//Iam in Bangloare 
 		driver.quit();
 		
 	}
