@@ -113,6 +113,7 @@ public class navigateToApplication {
 		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='mini-cart-status-container']"))));
 		driver.findElement(By.xpath("//button[@class='btn btn-default proceed-tocart']")).click();
 		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[@class='your-cart']")))).isDisplayed();
+		//my name is nagendra
 		driver.quit();
 		
 	}
