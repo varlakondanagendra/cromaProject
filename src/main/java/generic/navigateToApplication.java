@@ -55,7 +55,6 @@ public class navigateToApplication {
 		String firstProductDiscountPercentageXpath = "//div[contains(@class,'product-info')]/following-sibling::div/div/following-sibling::div/span[3]";	
 		String deliveryTypeXpath = "//div[contains(@class,'product-info')]/following-sibling::div/div/div[@class='delivery-icon']/span[2]/span";		
 		String firstProductLinkXpath = "//div[contains(@data-testid,'product-id')]";
-		
 		String firstProductTitile =driver.findElement(By.xpath(firstProductTitileXpath)).getText();
 		String firstProductDiscountedPrice = driver.findElement(By.xpath(firstProductDiscountedPriceXpath)).getText();
 		String firstProductOldPrice = driver.findElement(By.xpath(firstProductOldPriceXpath)).getText();
@@ -113,8 +112,6 @@ public class navigateToApplication {
 		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='mini-cart-status-container']"))));
 		driver.findElement(By.xpath("//button[@class='btn btn-default proceed-tocart']")).click();
 		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[@class='your-cart']")))).isDisplayed();
-		//my name is nagendra
-		//Iam in Bangloare 
 		driver.quit();
 		
 	}
